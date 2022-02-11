@@ -1,0 +1,12 @@
+// Copyright (c) 1998, 2021, Oracle and/or its affiliates. All rights reserved.
+
+// Applet Selection APDU Script
+//
+// Package:     simbad2.com.simbad2
+// Package AID: //aid/A001020304/01
+// Applet:      com.simbad2.simbad2
+// Applet AID:  //aid/A001020304/02
+//
+
+// Select com.simbad2.simbad2 applet
+0x00 0xA4 0x04 0x00 0x06 0xA0 0x01 0x02 0x03 0x04 0x02 0x7F;

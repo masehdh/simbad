@@ -1,0 +1,12 @@
+Digest for com/simbad2/javacard/Import.cap		[SHA-256: 60b4eb63c8e6900d0868c494b385c4448c1432565c4444be1d3032fa283f4cf1]
+Digest for com/simbad2/javacard/StaticField.cap		[SHA-256: 5863e9740af5fb905922380b2aa88309a16a285dd3412417ae8af941327901ee]
+Digest for com/simbad2/javacard/ConstantPool.cap		[SHA-256: 5edec9915975b4c68a3974e51f4dc8a120a23821a9dcfadfa359d6e77ed57a17]
+Digest for com/simbad2/javacard/Method.cap		[SHA-256: 3ae97e957fcf9de48e5c95c5a3e04e857499663bbca1ac225a70470ae9a7854a]
+Digest for com/simbad2/javacard/Class.cap		[SHA-256: ae96ba719df0ed80f874896ca1f4664d97135b7028da86bbd5a08b0500cd234e]
+Digest for com/simbad2/javacard/Header.cap		[SHA-256: 558b823e77084a8983445a5df96e6887a21cd29d0ec17cbc59097e606d62a024]
+Digest for com/simbad2/javacard/Directory.cap		[SHA-256: d718301893d2318cfae2934309ffdf0ecfd9c6905eb9fd77476138bd4af1b013]
+Digest for com/simbad2/javacard/RefLocation.cap		[SHA-256: c7372cb13d7f5214da651bba92c2ce9ad77b84e451bad26f36dee997c7761ecc]
+Digest for com/simbad2/javacard/Debug.cap		[SHA-256: 36e33a816588b9b79f8a697aa2dc99703f9698848a5e7369d40dacab5d3de412]
+Digest for com/simbad2/javacard/Applet.cap		[SHA-256: 69a970ee777f95e02d2122e1b0103cbb94372916ae7dacf35f89e377977f0761]
+Digest for com/simbad2/javacard/Descriptor.cap		[SHA-256: 89d87729b2c901a3e6199682dac7ccf098b03a56a887be1c3bd2118cac6805f4]
+Verification completed with 0 warnings and 0 errors.
