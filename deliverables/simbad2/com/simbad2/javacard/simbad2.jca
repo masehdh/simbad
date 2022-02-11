@@ -1,0 +1,680 @@
+// converted by version  [v3.1.0]
+// on Tue Feb 08 09:19:40 EST 2022
+
+.package com/simbad2 {
+	.aid 0xA0:0x1:0x2:0x3:0x4:0x1;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.6;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x9:0x0:0x3:0xFF:0xFF:0xFF:0xFF:0x89:0x10:0x71:0x0:0x2 2.6;		//sim/toolkit
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+	}
+
+	.applet {
+		0xA0:0x1:0x2:0x3:0x4:0x2 simbad2;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef byte[] simbad2/mainMenuStrings;
+		// 1
+		instanceFieldRef short[] simbad2/mainMenu;
+		// 2
+		instanceFieldRef byte[] simbad2/terminalProfileMask;
+		// 3
+		instanceFieldRef boolean simbad2/environmentOk;
+		// 4
+		instanceFieldRef byte[] simbad2/tempBuffer;
+		// 5
+		instanceFieldRef byte simbad2/menuEntryId_1;
+		// 6
+		instanceFieldRef boolean simbad2/eventsRegistered;
+		// 7
+		staticMethodRef 1.9.0()Lsim/toolkit/ToolkitRegistry;;		// sim/toolkit/ToolkitRegistry.getEntry()Lsim/toolkit/ToolkitRegistry;
+			.descriptor	Lsim/toolkit/ToolkitRegistry;	1.9;
+
+		// 8
+		virtualMethodRef 1.9.11([BSSBZBS)B;		// initMenuEntry([BSSBZBS)B
+		// 9
+		staticMethodRef 0.8.13(SB)[B;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+		// 10
+		virtualMethodRef 1.9.9(B)V;		// setEvent(B)V
+		// 11
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 12
+		.classRef simbad2;
+		// 13
+		staticMethodRef simbad2/<init>()V;
+		// 14
+		virtualMethodRef 0.3.2([BSB)V;		// register([BSB)V
+		// 15
+		staticMethodRef simbad2/testAppletEnvironment()Z;
+		// 16
+		staticMethodRef simbad2/registerEvents()V;
+		// 17
+		staticMethodRef simbad2/clearEvents()V;
+		// 18
+		staticMethodRef 1.10.0()Lsim/toolkit/ProactiveHandler;;		// sim/toolkit/ProactiveHandler.getTheHandler()Lsim/toolkit/ProactiveHandler;
+			.descriptor	Lsim/toolkit/ProactiveHandler;	1.10;
+
+		// 19
+		staticMethodRef 1.8.0()Lsim/toolkit/EnvelopeHandler;;		// sim/toolkit/EnvelopeHandler.getTheHandler()Lsim/toolkit/EnvelopeHandler;
+			.descriptor	Lsim/toolkit/EnvelopeHandler;	1.8;
+
+		// 20
+		virtualMethodRef 1.8.12()B;		// getItemIdentifier()B
+		// 21
+		virtualMethodRef simbad2/RootMenuHandler()V;
+		// 22
+		virtualMethodRef simbad2/displayMenu([B[SB)B;
+		// 23
+		staticMethodRef 1.3.1([BSS)Z;		// sim/toolkit/MEProfile.check([BSS)Z
+		// 24
+		virtualMethodRef 1.9.3(B)V;		// enableMenuEntry(B)V
+		// 25
+		virtualMethodRef 1.9.2(B)V;		// disableMenuEntry(B)V
+		// 26
+		virtualMethodRef 1.10.21(BBB)V;		// init(BBB)V
+		// 27
+		virtualMethodRef 1.4.12(B[BSS)V;		// appendTLV(B[BSS)V
+		// 28
+		virtualMethodRef 1.4.13(BB)V;		// appendTLV(BB)V
+		// 29
+		virtualMethodRef 1.10.22()B;		// send()B
+		// 30
+		staticMethodRef 1.5.0()Lsim/toolkit/ProactiveResponseHandler;;		// sim/toolkit/ProactiveResponseHandler.getTheHandler()Lsim/toolkit/ProactiveResponseHandler;
+			.descriptor	Lsim/toolkit/ProactiveResponseHandler;	1.5;
+
+		// 31
+		virtualMethodRef 1.5.18()B;		// getGeneralResult()B
+		// 32
+		virtualMethodRef 1.5.12()B;		// getItemIdentifier()B
+		// 33
+		virtualMethodRef 1.4.15(BB[BSS)V;		// appendTLV(BB[BSS)V
+	}
+
+	.class public simbad2 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.shareable;
+
+		.fields {
+			private byte[] mainMenuStrings 0;		// [B
+			private short[] mainMenu 1;		// [S
+			private byte[] terminalProfileMask 2;		// [B
+			private byte[] tempBuffer 3;		// [B
+			private byte menuEntryId_1 4;		// B
+			private boolean eventsRegistered 5;		// Z
+			private boolean environmentOk 6;		// Z
+			private static final short MAINMENU_OFFSET = 0;		// S
+			private static final short MAINMENU_LENGTH = 11;		// S
+			private static final short OFFLINE_OFFSET = 11;		// S
+			private static final short OFFLINE_LENGTH = 15;		// S
+			private static final short ONLINE_OFFSET = 26;		// S
+			private static final short ONLINE_LENGTH = 14;		// S
+			private static final short MY_ACCOUNT_OFFSET = 40;		// S
+			private static final short MY_ACCOUNT_LENGTH = 10;		// S
+			private static final short ABOUT_OFFSET = 50;		// S
+			private static final short ABOUT_LENGTH = 5;		// S
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+			processToolkit(B)V;
+			RootMenuHandler()V;
+			displayMenu([B[SB)B;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 0.2 { 		// javacard/framework/Shareable
+			}
+
+			.interface 1.1 { 		// sim/toolkit/ToolkitInterface
+				8;		// processToolkit(B)V
+			}
+
+			.interface 1.0 { 		// sim/toolkit/ToolkitConstants
+			}
+
+		}
+
+		.method public <init>()V 0 {
+			.stack 9;
+			.locals 1;
+
+				L0:	aload_0;
+					invokespecial 11;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					bspush 55;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 83;
+					bastore;
+					dup;
+					sconst_1;
+					bspush 105;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 109;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 98;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 97;
+					bastore;
+					dup;
+					sconst_5;
+					bspush 100;
+					bastore;
+					dup;
+					bspush 6;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 7;
+					bspush 72;
+					bastore;
+					dup;
+					bspush 8;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 9;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 10;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 11;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 12;
+					bspush 102;
+					bastore;
+					dup;
+					bspush 13;
+					bspush 102;
+					bastore;
+					dup;
+					bspush 14;
+					bspush 108;
+					bastore;
+					dup;
+					bspush 15;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 16;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 17;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 18;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 19;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 20;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 21;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 22;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 23;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 24;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 25;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 26;
+					bspush 79;
+					bastore;
+					dup;
+					bspush 27;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 28;
+					bspush 108;
+					bastore;
+					dup;
+					bspush 29;
+					bspush 105;
+					bastore;
+					dup;
+					bspush 30;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 31;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 32;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 33;
+					bspush 80;
+					bastore;
+					dup;
+					bspush 34;
+					bspush 97;
+					bastore;
+					dup;
+					bspush 35;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 36;
+					bspush 109;
+					bastore;
+					dup;
+					bspush 37;
+					bspush 101;
+					bastore;
+					dup;
+					bspush 38;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 39;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 40;
+					bspush 77;
+					bastore;
+					dup;
+					bspush 41;
+					bspush 121;
+					bastore;
+					dup;
+					bspush 42;
+					bspush 32;
+					bastore;
+					dup;
+					bspush 43;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 44;
+					bspush 99;
+					bastore;
+					dup;
+					bspush 45;
+					bspush 99;
+					bastore;
+					dup;
+					bspush 46;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 47;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 48;
+					bspush 110;
+					bastore;
+					dup;
+					bspush 49;
+					bspush 116;
+					bastore;
+					dup;
+					bspush 50;
+					bspush 65;
+					bastore;
+					dup;
+					bspush 51;
+					bspush 98;
+					bastore;
+					dup;
+					bspush 52;
+					bspush 111;
+					bastore;
+					dup;
+					bspush 53;
+					bspush 117;
+					bastore;
+					dup;
+					bspush 54;
+					bspush 116;
+					bastore;
+					putfield_a 0;		// reference com/simbad2/simbad2.mainMenuStrings
+					aload_0;
+					bspush 10;
+					newarray 12;
+					dup;
+					sconst_1;
+					bspush 11;
+					sastore;
+					dup;
+					sconst_2;
+					bspush 11;
+					sastore;
+					dup;
+					sconst_3;
+					bspush 15;
+					sastore;
+					dup;
+					sconst_4;
+					bspush 26;
+					sastore;
+					dup;
+					sconst_5;
+					bspush 14;
+					sastore;
+					dup;
+					bspush 6;
+					bspush 40;
+					sastore;
+					dup;
+					bspush 7;
+					bspush 10;
+					sastore;
+					dup;
+					bspush 8;
+					bspush 50;
+					sastore;
+					dup;
+					bspush 9;
+					sconst_5;
+					sastore;
+					putfield_a 1;		// reference com/simbad2/simbad2.mainMenu
+					aload_0;
+					sconst_5;
+					newarray 11;
+					dup;
+					sconst_0;
+					bspush 9;
+					bastore;
+					dup;
+					sconst_1;
+					sconst_3;
+					bastore;
+					dup;
+					sconst_2;
+					bspush 33;
+					bastore;
+					dup;
+					sconst_3;
+					bspush 112;
+					bastore;
+					dup;
+					sconst_4;
+					bspush 13;
+					bastore;
+					putfield_a 2;		// reference com/simbad2/simbad2.terminalProfileMask
+					sconst_0;
+					putfield_b_this 3;		// boolean com/simbad2/simbad2.environmentOk
+					aload_0;
+					sspush 180;
+					sconst_1;
+					invokestatic 9;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 4;		// reference com/simbad2/simbad2.tempBuffer
+					invokestatic 7;		// sim/toolkit/ToolkitRegistry.getEntry()Lsim/toolkit/ToolkitRegistry;
+					astore_1;
+				L1:	aload_0;
+					aload_1;
+					getfield_a_this 0;		// reference com/simbad2/simbad2.mainMenuStrings
+					sconst_0;
+					bspush 11;
+					sconst_0;
+					sconst_0;
+					sconst_0;
+					sconst_0;
+					invokevirtual 8;		// initMenuEntry([BSSBZBS)B
+					putfield_b 5;		// byte com/simbad2/simbad2.menuEntryId_1
+					aload_1;
+					sconst_1;
+					invokevirtual 10;		// setEvent(B)V
+					sconst_1;
+					putfield_b_this 6;		// boolean com/simbad2/simbad2.eventsRegistered
+					return;
+		}
+
+		.method public static install([BSB)V 1 {
+			.stack 5;
+			.locals 1;
+
+				L0:	new 12;		// com/simbad2/simbad2
+					dup;
+					invokespecial 13;		// com/simbad2/simbad2.<init>()V
+					astore_3;
+				L1:	aload_3;
+					aload_0;
+					sload_1;
+					sconst_1;
+					sadd;
+					aload_0;
+					sload_1;
+					baload;
+					invokevirtual 14;		// register([BSB)V
+					return;
+		}
+
+		.method public processToolkit(B)V 8 {
+			.stack 2;
+			.locals 3;
+
+				L0:	sload_1;
+					slookupswitch L11 2 1 L1 7 L6;
+				L1:	aload_0;
+					aload_0;
+					invokespecial 15;		// com/simbad2/simbad2.testAppletEnvironment()Z
+					putfield_b 3;		// boolean com/simbad2/simbad2.environmentOk
+					getfield_b_this 3;		// boolean com/simbad2/simbad2.environmentOk
+					ifeq L4;
+				L2:	getfield_b_this 6;		// boolean com/simbad2/simbad2.eventsRegistered
+					ifne L11;
+				L3:	aload_0;
+					invokespecial 16;		// com/simbad2/simbad2.registerEvents()V
+					goto L11;
+				L4:	getfield_b_this 6;		// boolean com/simbad2/simbad2.eventsRegistered
+					ifeq L11;
+				L5:	aload_0;
+					invokespecial 17;		// com/simbad2/simbad2.clearEvents()V
+					goto L11;
+				L6:	invokestatic 18;		// sim/toolkit/ProactiveHandler.getTheHandler()Lsim/toolkit/ProactiveHandler;
+					astore_3;
+				L7:	invokestatic 19;		// sim/toolkit/EnvelopeHandler.getTheHandler()Lsim/toolkit/EnvelopeHandler;
+					astore_2;
+				L8:	aload_2;
+					invokevirtual 20;		// getItemIdentifier()B
+					sstore 4;
+				L9:	sload 4;
+					getfield_b_this 5;		// byte com/simbad2/simbad2.menuEntryId_1
+					if_scmpne L11;
+				L10:	aload_0;
+					invokevirtual 21;		// RootMenuHandler()V
+				L11:	return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 0;
+			.locals 0;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	return;
+		}
+
+		.method public RootMenuHandler()V 9 {
+			.stack 4;
+			.locals 1;
+
+				L0:	aload_0;
+					getfield_a_this 0;		// reference com/simbad2/simbad2.mainMenuStrings
+					getfield_a_this 1;		// reference com/simbad2/simbad2.mainMenu
+					sconst_0;
+					invokevirtual 22;		// displayMenu([B[SB)B
+					sstore_1;
+				L1:	sload_1;
+					iflt L9;
+				L2:	sload_1;
+					sconst_3;
+					if_scmplt L4;
+				L3:	goto L9;
+				L4:	sload_1;
+					stableswitch L8 0 3 L5 L6 L7 L8;
+				L5:	goto L0;
+				L6:	goto L0;
+				L7:	goto L0;
+				L8:	goto L0;
+				L9:	return;
+		}
+
+		.method private testAppletEnvironment()Z {
+			.stack 3;
+			.locals 0;
+
+				L0:	getfield_a_this 2;		// reference com/simbad2/simbad2.terminalProfileMask
+					sconst_0;
+					getfield_a_this 2;		// reference com/simbad2/simbad2.terminalProfileMask
+					arraylength;
+					invokestatic 23;		// sim/toolkit/MEProfile.check([BSS)Z
+					sreturn;
+		}
+
+		.method private registerEvents()V {
+			.stack 2;
+			.locals 1;
+
+				L0:	invokestatic 7;		// sim/toolkit/ToolkitRegistry.getEntry()Lsim/toolkit/ToolkitRegistry;
+					astore_1;
+				L1:	aload_1;
+					getfield_b_this 5;		// byte com/simbad2/simbad2.menuEntryId_1
+					invokevirtual 24;		// enableMenuEntry(B)V
+					sconst_1;
+					putfield_b_this 6;		// boolean com/simbad2/simbad2.eventsRegistered
+					return;
+		}
+
+		.method private clearEvents()V {
+			.stack 2;
+			.locals 1;
+
+				L0:	invokestatic 7;		// sim/toolkit/ToolkitRegistry.getEntry()Lsim/toolkit/ToolkitRegistry;
+					astore_1;
+				L1:	aload_1;
+					getfield_b_this 5;		// byte com/simbad2/simbad2.menuEntryId_1
+					invokevirtual 25;		// disableMenuEntry(B)V
+					sconst_0;
+					putfield_b_this 6;		// boolean com/simbad2/simbad2.eventsRegistered
+					return;
+		}
+
+		.method public displayMenu([B[SB)B 10 {
+			.stack 8;
+			.locals 4;
+
+				L0:	invokestatic 18;		// sim/toolkit/ProactiveHandler.getTheHandler()Lsim/toolkit/ProactiveHandler;
+					astore 4;
+				L1:	aload 4;
+					bspush 36;
+					bspush -128;
+					bspush -126;
+					invokevirtual 26;		// init(BBB)V
+					aload 4;
+					sconst_5;
+					aload_1;
+					aload_2;
+					sconst_0;
+					saload;
+					aload_2;
+					sconst_1;
+					saload;
+					invokevirtual 27;		// appendTLV(B[BSS)V
+					sconst_2;
+					sstore 5;
+				L2:	sconst_0;
+					sstore 6;
+				L3:	goto L5;
+				L4:	aload 4;
+					bspush -113;
+					sload 6;
+					aload_1;
+					aload_2;
+					sload 5;
+					saload;
+					aload_2;
+					sload 5;
+					sconst_1;
+					sadd;
+					saload;
+					invokevirtual 33;		// appendTLV(BB[BSS)V
+					sload 6;
+					sconst_1;
+					sadd;
+					s2b;
+					sstore 6;
+					sinc 5 2;
+				L5:	sload 5;
+					aload_2;
+					arraylength;
+					if_scmplt L4;
+				L6:	sload_3;
+					iflt L8;
+				L7:	aload 4;
+					bspush 16;
+					sload_3;
+					invokevirtual 28;		// appendTLV(BB)V
+				L8:	aload 4;
+					invokevirtual 29;		// send()B
+					dup;
+					sstore_3;
+					ifge L10;
+				L9:	sload_3;
+					sreturn;
+				L10:	invokestatic 30;		// sim/toolkit/ProactiveResponseHandler.getTheHandler()Lsim/toolkit/ProactiveResponseHandler;
+					astore 7;
+				L11:	aload 7;
+					invokevirtual 31;		// getGeneralResult()B
+					ifeq L13;
+				L12:	bspush -2;
+					sreturn;
+				L13:	aload 7;
+					invokevirtual 32;		// getItemIdentifier()B
+					sreturn;
+		}
+
+	}
+
+}
